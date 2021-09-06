@@ -27,14 +27,21 @@ def main():
         logging.basicConfig(level=logging.DEBUG)
 
     logger.info("Downloading pipeline...")
-    pipeline_name = 'fill-mask'
-    # pipeline_kwargs = {'top_k': args.number, 'max_length': args.length}
-    pipeline_kwargs = {'top_k': args.number}
+    # Set the pipline to complete the text.
+    # pipeline_name = "fill-mask"
+    # pipeline_name = "ner"
+    # pipeline_name = "feature-extraction"
+    # pipeline_name = "question-answering"
+    pipeline_name = "text-generation"
+
+    # pipeline_kwargs = {'max_length': args.length}
+    pipeline_kwargs = {}
     pipeline_class = pipeline(pipeline_name, **pipeline_kwargs)
 
     logger.info("Generating completions...")
     # completions = pipeline_class(args.seed)
-    completions = pipeline_class('Customer complaint: <mask>')
+    # completions = pipeline_class('Customer complaint: <mask>')
+    completions = pipeline_class('Customer complaint: ')
 
     if args.output is None:
         for completion in completions:
