@@ -37,11 +37,13 @@ def main():
     # pipeline_kwargs = {'max_length': args.length}
     pipeline_kwargs = {}
     pipeline_class = pipeline(pipeline_name, **pipeline_kwargs)
+    # Set pipeline_kwargs to generate multiple ouput texts.
+    pipeline_kwargs = {'num_return_sequences': args.number}
 
     logger.info("Generating completions...")
     # completions = pipeline_class(args.seed)
     # completions = pipeline_class('Customer complaint: <mask>')
-    completions = pipeline_class('Customer complaint: ')
+    completions = pipeline_class('Chat protocol of support hotline.\nCustomer: ')
 
     if args.output is None:
         for completion in completions:
