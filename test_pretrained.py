@@ -38,12 +38,18 @@ def main():
     pipeline_kwargs = {}
     pipeline_class = pipeline(pipeline_name, **pipeline_kwargs)
     # Set pipeline_kwargs to generate multiple ouput texts.
-    pipeline_kwargs = {'num_return_sequences': args.number}
+    # Increase the pipline generation temperature.
+    pipeline_kwargs = {'num_return_sequences': args.number, 'temperature': 1.0}
 
     logger.info("Generating completions...")
     # completions = pipeline_class(args.seed)
     # completions = pipeline_class('Customer complaint: <mask>')
-    completions = pipeline_class('Chat protocol of support hotline.\nCustomer: ')
+    input_str = \
+    '''Chat protocol of support hotline.\n''' \
+    '''Support: How can I help you?\n''' \
+    '''Customer's question:'''
+    print("input_str:", input_str)
+    completions = pipeline_class(input_str)
 
     if args.output is None:
         for completion in completions:
