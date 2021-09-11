@@ -72,7 +72,7 @@ class TrainGPT2:
                 print(f'Epoch: {epoch}\tLoss: {loss}')
 
             # Log the loss to Visdom and set a title for the plot.
-            vis.line(X=torch.tensor([epoch]), Y=torch.tensor([loss]), win='loss', update='append', opts=dict(title='loss'))
+            vis.line(X=torch.tensor([iteration]), Y=torch.tensor([loss]), win='loss', update='append', opts=dict(title='loss'))
 
             # Smoothed loss for logging.
             self.smoothed_loss = 0.99 * self.smoothed_loss + 0.01 * loss
